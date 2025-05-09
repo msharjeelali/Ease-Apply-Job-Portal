@@ -20,7 +20,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/jobRecyclerView"
-        android:layout_below="@id/titleHomepage">
+        android:layout_below="@id/titleHomepage"
+        android:background="#eeeeee">
 
     </androidx.recyclerview.widget.RecyclerView>
 

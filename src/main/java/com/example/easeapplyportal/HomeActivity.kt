@@ -2,17 +2,19 @@ package com.example.easeapplyportal
 
 import Job
 import JobAdapter
+import JobSwipeGesture
+import StackLayoutManager
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 class HomeActivity : AppCompatActivity() {
 
-    val mockJobs = listOf(
+    val mockJobs = mutableListOf<Job>(
         Job(
             id = "1",
             title = "Android Developer",
@@ -141,9 +143,35 @@ class HomeActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_home)
 
-        val jobRecyclerView = findViewById<RecyclerView>(R.id.jobRecyclerView);
-        jobRecyclerView.layoutManager = LinearLayoutManager(this)
+        val jobRecyclerView = findViewById<RecyclerView>(R.id.jobRecyclerView)
         val jobAdapter = JobAdapter(mockJobs)
         jobRecyclerView.adapter = jobAdapter
+        jobRecyclerView.layoutManager = LinearLayoutManager(this)
+        // jobRecyclerView.layoutManager = StackLayoutManager()
+
+        val userSwipeGesture = object: JobSwipeGesture(){
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                when(direction){
+                    ItemTouchHelper.LEFT -> {
+                        Toast.makeText(this@HomeActivity, "Job rejected", Toast.LENGTH_SHORT).show()
+                        jobAdapter.deleteItem(viewHolder.adapterPosition)
+                    }
+                    ItemTouchHelper.RIGHT -> {
+                        Toast.makeText(this@HomeActivity, "Successfully applied for ${mockJobs[viewHolder.adapterPosition].title}", Toast.LENGTH_SHORT).show()
+                        jobAdapter.deleteItem(viewHolder.adapterPosition)
+                    }
+                }
+                super.onSwiped(viewHolder, direction)
+            }
+        }
+
+        val jobTouchHelper = ItemTouchHelper(userSwipeGesture)
+        jobTouchHelper.attachToRecyclerView(jobRecyclerView)
+
+        jobAdapter.setOnItemClickListener(object: JobAdapter.ItemClickListenerInterface{
+            override fun onItemClick(position: Int){
+                Toast.makeText(this@HomeActivity, "CLicked on ${mockJobs[position].title}", Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 }
