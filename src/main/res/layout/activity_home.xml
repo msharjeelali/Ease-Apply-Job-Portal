@@ -7,20 +7,42 @@
     android:layout_height="match_parent"
     tools:context=".HomeActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Home Page"
-        android:textSize="34sp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
-        android:id="@+id/titleHomepage"/>
-
-    <androidx.recyclerview.widget.RecyclerView
+    <RelativeLayout
+        android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="100dp">
+
+        <TextView
+            android:id="@+id/appName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="@font/bagel_fat_one"
+            android:text="Ease Apply"
+            android:textColor="#0C2C4D"
+            android:textSize="34sp"
+            android:textStyle="bold"
+            tools:ignore="HardcodedText" />
+
+        <ImageView
+            android:id="@+id/profileImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:contentDescription="Profile image to navigate to user profile page"
+            android:src="@drawable/profile"
+            android:layout_marginEnd="16dp"
+            style="@style/RoundedImage"
+            tools:ignore="HardcodedText" />
+
+    </RelativeLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/jobRecyclerView"
-        android:layout_below="@id/titleHomepage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/header"
         android:background="#eeeeee">
 
     </androidx.recyclerview.widget.RecyclerView>

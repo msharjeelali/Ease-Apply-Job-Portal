@@ -17,23 +17,17 @@ class StackLayoutManager : RecyclerView.LayoutManager() {
         if (state.itemCount == 0) return
 
         // Only layout the first item
-        val itemCount = state.itemCount
-        for (i in 0 until itemCount) {
-            val view = recycler.getViewForPosition(i)
-            addView(view)
-            measureChildWithMargins(view, 0, 0)
+        val view = recycler.getViewForPosition(0)
+        addView(view)
+        measureChildWithMargins(view, 0, 0)
 
-            val decoratedWidth = getDecoratedMeasuredWidth(view)
-            val decoratedHeight = getDecoratedMeasuredHeight(view)
+        val decoratedWidth = getDecoratedMeasuredWidth(view)
+        val decoratedHeight = getDecoratedMeasuredHeight(view)
 
-            Log.d("StackLayoutManager", "Width: $decoratedWidth, Height: $decoratedHeight")
+        Log.d("StackLayoutManager", "Width: $decoratedWidth, Height: $decoratedHeight")
 
-            // Layout the view at the top-left corner
-            layoutDecoratedWithMargins(view, 0, 0, decoratedWidth, decoratedHeight)
-
-            // Since we only want to show one item at a time, break after the first item
-            break
-        }
+        // Layout the view at the top-left corner
+        layoutDecoratedWithMargins(view, 0, 0, decoratedWidth, decoratedHeight)
     }
 
     override fun canScrollVertically(): Boolean = false
@@ -42,6 +36,17 @@ class StackLayoutManager : RecyclerView.LayoutManager() {
     override fun onItemsRemoved(recyclerView: RecyclerView, positionStart: Int, itemCount: Int) {
         super.onItemsRemoved(recyclerView, positionStart, itemCount)
         // Request layout to update the view after items are removed
+        requestLayout()
+    }
+
+    override fun onItemsChanged(recyclerView: RecyclerView) {
+        super.onItemsChanged(recyclerView)
+        requestLayout()
+    }
+
+    override fun onLayoutCompleted(state: RecyclerView.State?) {
+        super.onLayoutCompleted(state)
+        // Ensure the layout is updated after any changes
         requestLayout()
     }
 }

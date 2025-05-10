@@ -3,14 +3,16 @@ package com.example.easeapplyportal
 import Job
 import JobAdapter
 import JobSwipeGesture
-import StackLayoutManager
 import android.os.Bundle
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import android.content.Intent
+import com.google.firebase.auth.FirebaseAuth
 
 class HomeActivity : AppCompatActivity() {
 
@@ -142,6 +144,21 @@ class HomeActivity : AppCompatActivity() {
         enableEdgeToEdge()
 
         setContentView(R.layout.activity_home)
+
+        // Check if user is logged in
+        val currentUser = FirebaseAuth.getInstance().currentUser
+        if (currentUser == null) {
+            startActivity(Intent(this, LoginActivity::class.java))
+            finish()
+        }
+
+        // Set up profile image click listener
+        val profileImage = findViewById<ImageView>(R.id.profileImage)
+        profileImage.setOnClickListener {
+            // Start UserProfileActivity
+            startActivity(Intent(this@HomeActivity, UserProfileActivity::class.java))
+        }
+
 
         val jobRecyclerView = findViewById<RecyclerView>(R.id.jobRecyclerView)
         val jobAdapter = JobAdapter(mockJobs)
