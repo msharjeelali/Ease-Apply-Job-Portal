@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".RecruiterRegisterFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:ignore="UselessParent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Register as Recruiter"
+            android:layout_gravity="center"
+            android:textSize="30sp"
+            android:textColor="#2F930B"
+            android:fontFamily="sans-serif-medium"
+            tools:ignore="HardcodedText" />
+
+        <EditText
+            android:id="@+id/inputName"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="32dp"
+            android:background="@drawable/edit_text_border"
+            android:hint="company name"
+            android:inputType="text"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            tools:ignore="Autofill,HardcodedText,VisualLintTextFieldSize" />
+
+        <EditText
+            android:id="@+id/inputEmail"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/edit_text_border"
+            android:hint="company email"
+            android:inputType="textEmailAddress"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            tools:ignore="Autofill,HardcodedText,VisualLintTextFieldSize" />
+
+        <EditText
+            android:id="@+id/inputPhone"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/edit_text_border"
+            android:hint="company phone number"
+            android:inputType="phone"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            tools:ignore="Autofill,HardcodedText,VisualLintTextFieldSize" />
+
+        <EditText
+            android:id="@+id/inputPassword"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/edit_text_border"
+            android:hint="password"
+            android:inputType="textPassword"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            tools:ignore="Autofill,HardcodedText,VisualLintTextFieldSize" />
+
+        <EditText
+            android:id="@+id/inputRePassword"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/edit_text_border"
+            android:hint="re-enter password"
+            android:inputType="textPassword"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            tools:ignore="Autofill,HardcodedText,VisualLintTextFieldSize" />
+
+        <Button
+            android:id="@+id/buttonRegister"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"
+            android:backgroundTint="#2F930B"
+            android:elevation="4dp"
+            android:fontFamily="sans-serif-medium"
+            android:padding="12dp"
+            android:text="Register"
+            android:textColor="#FFFFFF"
+            tools:ignore="HardcodedText,VisualLintButtonSize,TextContrastCheck" />
+
+    </LinearLayout>
+
+</FrameLayout>

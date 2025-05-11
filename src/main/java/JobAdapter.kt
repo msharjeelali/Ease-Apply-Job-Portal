@@ -46,9 +46,9 @@ class JobAdapter(private var jobList: MutableList<Job>) :
         holder.title.text = job.title
         holder.company.text = job.companyName
         holder.location.text = job.location
-        holder.jobType.text = job.jobType
+        holder.jobType.text = job.category
         holder.salary.text = job.salary ?: "Not specified"
-        holder.posted.text = job.postedDate
+        holder.posted.text = job.dateposted
         holder.deadline.text = job.deadline ?: "No deadline"
     }
 

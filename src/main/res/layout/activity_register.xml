@@ -2,8 +2,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:paddingLeft="50dp"
+    android:background="#F5F5F5"
     android:paddingRight="50dp"
     tools:context=".RegisterActivity">
 
@@ -12,10 +13,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="30dp"
         android:fontFamily="@font/bagel_fat_one"
         android:text="Ease Apply"
-        android:textColor="#0C2C4D"
+        android:textColor="#2F930B"
         android:textSize="34sp"
         android:textStyle="bold"
         tools:ignore="HardcodedText" />
@@ -26,113 +27,69 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/appName"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="20dp"
         android:fontFamily="sans-serif-thin"
         android:text="Build Your Future – Register Now"
         android:textAlignment="center"
-        android:textColor="@android:color/black"
+        android:textColor="#212121"
         android:textSize="30sp"
         android:textStyle="bold"
         tools:ignore="HardcodedText" />
 
-    <EditText
-        android:id="@+id/inputName"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
+    <LinearLayout
+        style="?android:attr/buttonBarStyle"
         android:layout_below="@id/registerTitle"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="32dp"
-        android:background="@drawable/edit_text_border"
-        android:hint="full name"
-        android:inputType="textPersonName"
-        android:paddingStart="12dp"
-        android:paddingEnd="12dp"
-        tools:ignore="Autofill,HardcodedText,VisualLintTextFieldSize" />
-
-    <EditText
-        android:id="@+id/inputEmail"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_below="@id/inputName"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/edit_text_border"
-        android:hint="email"
-        android:inputType="textEmailAddress"
-        android:paddingStart="12dp"
-        android:paddingEnd="12dp"
-        tools:ignore="Autofill,HardcodedText,VisualLintTextFieldSize" />
-
-    <EditText
-        android:id="@+id/inputPhone"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_below="@id/inputEmail"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/edit_text_border"
-        android:hint="phone number"
-        android:inputType="phone"
-        android:paddingStart="12dp"
-        android:paddingEnd="12dp"
-        tools:ignore="Autofill,HardcodedText,VisualLintTextFieldSize" />
-
-    <EditText
-        android:id="@+id/inputPassword"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_below="@id/inputPhone"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/edit_text_border"
-        android:hint="password"
-        android:inputType="textPassword"
-        android:paddingStart="12dp"
-        android:paddingEnd="12dp"
-        tools:ignore="Autofill,HardcodedText,VisualLintTextFieldSize" />
-
-    <EditText
-        android:id="@+id/inputRePassword"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_below="@id/inputPassword"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/edit_text_border"
-        android:hint="re-enter password"
-        android:inputType="textPassword"
-        android:paddingStart="12dp"
-        android:paddingEnd="12dp"
-        tools:ignore="Autofill,HardcodedText,VisualLintTextFieldSize" />
-
-    <Button
-        android:id="@+id/buttonRegister"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/inputRePassword"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:id="@+id/fragmentButtons"
+        android:layout_marginTop="24dp">
+
+        <Button
+            android:id="@+id/personButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Person"
+            android:textColor="@color/black"
+            tools:ignore="ButtonStyle,HardcodedText"
+            android:layout_weight="0.5"
+            android:backgroundTint="#ffffff" />
+
+        <Button
+            android:id="@+id/recruiterButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Recruiter"
+            android:textColor="@color/black"
+            tools:ignore="HardcodedText"
+            android:backgroundTint="#F5F5F5"
+            android:layout_weight="0.5"/>
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/registerFragmentContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/fragmentButtons"
+        android:layout_weight="1"
         android:layout_marginTop="16dp"
-        android:layout_marginBottom="8dp"
-        android:backgroundTint="#28A745"
-        android:elevation="4dp"
-        android:fontFamily="sans-serif-medium"
-        android:padding="12dp"
-        android:text="Register"
-        android:textColor="#212121"
-        tools:ignore="HardcodedText,VisualLintButtonSize" />
+        tools:ignore="ObsoleteLayoutParam" />
 
     <Button
         android:id="@+id/buttonLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/buttonRegister"
+        android:layout_below="@id/registerFragmentContainer"
         android:layout_marginBottom="8dp"
-        android:backgroundTint="#007BFF"
+        android:backgroundTint="#ffffff"
         android:elevation="4dp"
         android:fontFamily="sans-serif-medium"
         android:minHeight="48dp"
         android:padding="12dp"
         android:text="Login"
-        android:textColor="#000000"
-        tools:ignore="HardcodedText,VisualLintButtonSize" />
+        android:textColor="#2F930B"
+        tools:ignore="HardcodedText,VisualLintButtonSize,TouchTargetSizeCheck,TextContrastCheck" />
 
 </RelativeLayout>

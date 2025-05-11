@@ -15,6 +15,12 @@
         android:theme="@style/Theme.EaseApplyPortal"
         tools:targetApi="31">
         <activity
+            android:name=".EmployerDashboardActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ProfileActivity"
+            android:exported="false" />
+        <activity
             android:name=".UserProfileActivity"
             android:exported="false" />
         <activity

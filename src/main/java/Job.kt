@@ -1,15 +1,16 @@
 data class Job(
-    val id: String,
     val title: String,
-    val companyName: String,
+    val description: String,
     val location: String,
     val salary: String?,
-    val jobType: String,
-    val description: String,
-    val requirements: List<String>,
-    val postedDate: String,
-    val deadline: String?,
-    val experienceLevel: String,
+    val skills: List<String>,
     val category: String,
-    val applicants: Int
-)
+    val experienceLevel: String,
+    val deadline: String?,
+    val dateposted: String?,
+    val companyName: String,
+    val companyId: String,
+) {
+    // Empty constructor required for Firebase
+    constructor() : this("", "", "", null, emptyList(), "", "", null, null, "", "")
+}

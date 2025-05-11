@@ -5,11 +5,24 @@
         <item name="cornerSize">50%</item>
     </style>
 
-    <style name="CircularImageWithBorder">
-        <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">60%</item>
+    <style name="SectionTitle">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">#4F46E5</item>
+        <item name="android:paddingTop">12dp</item>
+    </style>
 
-        <item name="strokeColor">@android:color/black</item>
+    <style name="SectionText">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">#0C2C4D</item>
+        <item name="android:paddingTop">4dp</item>
+    </style>
+
+    <style name="CircularImageWithBorder" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+        <item name="strokeColor">#4F46E5</item>
         <item name="strokeWidth">2dp</item>
     </style>
+
 </resources>

@@ -11,7 +11,7 @@
         android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp">
+        android:layout_marginTop="25dp">
 
         <TextView
             android:id="@+id/appName"
@@ -27,8 +27,8 @@
 
         <ImageView
             android:id="@+id/profileImage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_alignParentEnd="true"
             android:contentDescription="Profile image to navigate to user profile page"
             android:src="@drawable/profile"
@@ -46,6 +46,5 @@
         android:background="#eeeeee">
 
     </androidx.recyclerview.widget.RecyclerView>
-
 
 </RelativeLayout>

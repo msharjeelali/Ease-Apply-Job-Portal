@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="12dp"
+    android:orientation="vertical"
+    android:id="@+id/main">
+
+    <!-- Main container to display all information -->
+    <LinearLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:layout_alignParentStart="true">
+
+        <!-- All textual data layout -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <!-- Platform name -->
+            <TextView
+                android:id="@+id/platformName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="2dp"
+                android:text="GitHub"
+                android:textColor="#374151"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                tools:ignore="HardcodedText" />
+
+            <!-- PLatform account link -->
+            <TextView
+                android:id="@+id/platformLink"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="www.github.com"
+                android:textColor="#6B7280"
+                android:textSize="16sp"
+                tools:ignore="HardcodedText" />
+
+            <!-- End of textual data layout -->
+        </LinearLayout>
+
+        <!-- Icon button to edit link -->
+        <ImageButton
+            android:id="@+id/buttonEditSocialLink"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="10dp"
+            android:backgroundTint="#ffffff"
+            android:contentDescription="Edit icon"
+            android:src="@drawable/edit"
+            tools:ignore="HardcodedText,TouchTargetSizeCheck" />
+
+        <!-- Icon button to delete social link -->
+        <ImageButton
+            android:id="@+id/buttonDeleteSocialLink"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="10dp"
+            android:backgroundTint="#ffffff"
+            android:contentDescription="Delete icon"
+            android:src="@drawable/delete"
+            tools:ignore="HardcodedText,TouchTargetSizeCheck" />
+
+        <!-- End of degree information container layout -->
+    </LinearLayout>
+
+</RelativeLayout>

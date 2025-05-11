@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="12dp"
+    android:orientation="vertical">
+
+    <!-- Main container to display all information -->
+    <LinearLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        tools:ignore="UselessParent">
+
+        <!-- All textual data layout -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <!-- Degree name and field -->
+            <TextView
+                android:id="@+id/degreeName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="2dp"
+                android:text="B.Sc. Computer Science"
+                android:textColor="#374151"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                tools:ignore="HardcodedText" />
+
+            <!-- Degree institute name -->
+            <TextView
+                android:id="@+id/instituteName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="University of Somewhere"
+                android:textColor="#6B7280"
+                android:textSize="16sp"
+                tools:ignore="HardcodedText" />
+
+            <!-- Layout for degree duration -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <!-- Start date -->
+                <TextView
+                    android:id="@+id/dateFrom"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="From"
+                    android:textSize="16sp"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:text="---"
+                    android:textSize="16sp"
+                    tools:ignore="HardcodedText" />
+
+                <!-- End date -->
+                <TextView
+                    android:id="@+id/dateTill"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Till"
+                    android:textSize="16sp"
+                    tools:ignore="HardcodedText" />
+
+                <!-- End of degree duraiton layout -->
+            </LinearLayout>
+
+            <!-- End of textual data layout -->
+        </LinearLayout>
+
+        <!-- Icon button to edit degree information -->
+        <ImageButton
+            android:id="@+id/buttonEditEducation"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="10dp"
+            android:backgroundTint="#ffffff"
+            android:contentDescription="Edit icon"
+            android:src="@drawable/edit"
+            tools:ignore="HardcodedText,TouchTargetSizeCheck" />
+
+        <!-- Icon button to delete degree information -->
+        <ImageButton
+            android:id="@+id/buttonDeleteEducation"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="10dp"
+            android:backgroundTint="#ffffff"
+            android:contentDescription="Delete icon"
+            android:src="@drawable/delete"
+            tools:ignore="HardcodedText,TouchTargetSizeCheck" />
+
+        <!-- End of degree information container layout -->
+    </LinearLayout>
+
+    <!-- Separator line between entries
+    <View
+        android:layout_width="150dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:background="@color/jobgray"
+        android:layout_below="@id/container"
+        android:layout_centerHorizontal="true"
+        /> -->
+
+</RelativeLayout>
