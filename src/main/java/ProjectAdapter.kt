@@ -32,5 +32,5 @@ class ProjectAdapter(private var projectList: MutableList<Project>?, private val
         }
     }
 
-    override fun getItemCount(): Int = projectList!!.size
+    override fun getItemCount(): Int = projectList?.size ?: 0
 }

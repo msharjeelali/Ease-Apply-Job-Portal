@@ -1,3 +1,4 @@
+import EducationAdapter.clickListenerEducation
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -6,7 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.easeapplyportal.R
 
-class CourseAdapter(private var courseList: MutableList<String>, private val onDeleteClick: (String) -> Unit) :
+class CourseAdapter(private var courseList: MutableList<String>?, private val onDeleteClick: (String) -> Unit) :
     RecyclerView.Adapter<CourseAdapter.CourseViewHolder>() {
 
     inner class CourseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -21,12 +22,12 @@ class CourseAdapter(private var courseList: MutableList<String>, private val onD
     }
 
     override fun onBindViewHolder(holder: CourseViewHolder, position: Int) {
-        val course = courseList[position]
+        val course = courseList?.get(position)
         holder.courseTextView.text = course
         holder.deleteButton.setOnClickListener {
             onDeleteClick(course.toString())
         }
     }
 
-    override fun getItemCount(): Int = courseList.size
+    override fun getItemCount(): Int = courseList?.size ?: 0
 }

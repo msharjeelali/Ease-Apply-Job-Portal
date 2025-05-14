@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".ViewJobEmployerActivity"
+    tools:ignore="ScrollViewCount">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:paddingBottom="12dp"
+        android:text="Create New Job Post"
+        android:textColor="#2F930B"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:importantForAutofill="no"
+        android:text="Enter job title"
+        tools:ignore="HardcodedText" />
+
+    <EditText
+        android:id="@+id/jobTitleInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edit_text_border"
+        android:hint="Software Engineer"
+        android:inputType="text"
+        android:padding="12dp"
+        tools:ignore="Autofill,HardcodedText" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enter job description"
+        tools:ignore="HardcodedText" />
+
+    <EditText
+        android:id="@+id/jobDescriptionInput"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/edit_text_border"
+        android:gravity="top"
+        android:hint="We are looking for...."
+        android:importantForAutofill="no"
+        android:inputType="textMultiLine"
+        android:padding="12dp"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enter location"
+        tools:ignore="HardcodedText" />
+
+    <EditText
+        android:id="@+id/locationInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/edit_text_border"
+        android:hint="Onsite / Remote / Hybrid"
+        android:importantForAutofill="no"
+        android:inputType="text"
+        android:padding="12dp"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enter salary"
+        tools:ignore="HardcodedText" />
+
+    <EditText
+        android:id="@+id/salaryInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/edit_text_border"
+        android:hint="Salary (Optional)"
+        android:importantForAutofill="no"
+        android:inputType="number"
+        android:padding="12dp"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enter skills required"
+        tools:ignore="HardcodedText" />
+
+    <EditText
+        android:id="@+id/skillsRequiredInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/edit_text_border"
+        android:hint="e.g. java, kotlin, javascript, python"
+        android:importantForAutofill="no"
+        android:inputType="text"
+        android:padding="12dp"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enter category"
+        tools:ignore="HardcodedText" />
+
+    <EditText
+        android:id="@+id/categoryInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/edit_text_border"
+        android:hint="Full-time / Part-time / Internship"
+        android:importantForAutofill="no"
+        android:inputType="text"
+        android:padding="12dp"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enter experience required"
+        tools:ignore="HardcodedText" />
+
+    <EditText
+        android:id="@+id/experienceLevelInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/edit_text_border"
+        android:hint="Senior / Mid-level / Entry-level"
+        android:importantForAutofill="no"
+        android:inputType="text"
+        android:minHeight="48dp"
+        android:padding="12dp"
+        tools:ignore="HardcodedText,TouchTargetSizeCheck" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enter application deadline"
+        tools:ignore="HardcodedText" />
+
+    <EditText
+        android:id="@+id/deadlineInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/edit_text_border"
+        android:hint="yyyy-mm-dd"
+        android:importantForAutofill="no"
+        android:inputType="date"
+        android:padding="12dp"
+        tools:ignore="HardcodedText" />
+
+    <Button
+        android:id="@+id/buttonAction"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:backgroundTint="#2F930B"
+        android:minHeight="48dp"
+        android:text="Action"
+        android:textColor="#FFFFFF"
+        tools:ignore="HardcodedText,TextContrastCheck" />
+
+    </LinearLayout>
+
+</ScrollView>

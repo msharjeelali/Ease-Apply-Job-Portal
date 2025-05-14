@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="5dp"
+    card_view:cardCornerRadius="8dp"
+    card_view:cardElevation="4dp"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Job Title -->
+        <TextView
+            android:id="@+id/textViewJobTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Android Developer"
+            android:textColor="@color/blue"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            tools:ignore="HardcodedText" />
+
+        <!-- Job Category and Salary -->
+        <TextView
+            android:id="@+id/textViewCategorySalary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Full-time • PKR 120,000/month"
+            android:textColor="#444444"
+            android:textSize="14sp"
+            android:layout_marginTop="4dp"
+            tools:ignore="HardcodedText" />
+
+        <!-- Skills -->
+        <TextView
+            android:id="@+id/textViewSkills"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Skills: Kotlin, Android SDK, REST APIs, Git"
+            android:textColor="#666666"
+            android:textSize="13sp"
+            android:layout_marginTop="6dp"
+            tools:ignore="HardcodedText" />
+
+        <!-- Posted Date & Deadline -->
+        <TextView
+            android:id="@+id/textViewDates"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Posted: 2025-05-01 | Deadline: 2025-05-30"
+            android:textColor="#999999"
+            android:textSize="12sp"
+            android:layout_marginTop="6dp"
+            tools:ignore="HardcodedText" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+        <!-- Applicants -->
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewApplicants"
+            android:text="Applicants: 10"
+            android:layout_marginTop="6dp"
+            android:layout_weight="1"
+            android:textColor="@color/textGreen"
+            tools:ignore="HardcodedText" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/buttonEditJob"
+                android:text="Edit Job"
+                tools:ignore="HardcodedText" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

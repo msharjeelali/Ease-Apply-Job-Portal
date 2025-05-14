@@ -2,11 +2,11 @@ package com.example.easeapplyportal
 
 import Education
 import EducationAdapter
+import Employee
 import Profile
 import ProfileAdapter
 import SocialLink
 import SocialLinkAdapter
-import User
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
@@ -20,13 +20,12 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 
-class UserProfileActivity : AppCompatActivity(), EducationAdapter.clickListenerEducation, SocialLinkAdapter.clickListenerSocial{
-    var firebaseAuth: FirebaseAuth? = null
-    var currentUser: User? = null
-    var uid: String? = null
+class UserProfileActivity : AppCompatActivity(), EducationAdapter.clickListenerEducation,
+    SocialLinkAdapter.clickListenerSocial {
+    var currentUser: Employee? = null
+    var currentUserId: String? = null
 
     lateinit var educationRecyclerView: RecyclerView
     lateinit var educationAdapter: EducationAdapter
@@ -48,8 +47,12 @@ class UserProfileActivity : AppCompatActivity(), EducationAdapter.clickListenerE
         // Set layout file to activity_user_profile.xml
         setContentView(R.layout.activity_user_profile)
 
-        // Authenticate user with Firebase
-        firebaseAuth = FirebaseAuth.getInstance()
+        // Check if user is logged in
+        currentUserId = intent.getStringExtra("uid").toString()
+        if (currentUserId == "") {
+            startActivity(Intent(this, LoginActivity::class.java))
+            finish()
+        }
 
         // Implement RecyclerView and Adapter for education section
         educationRecyclerView = findViewById<RecyclerView>(R.id.educationRecyclerView)
@@ -63,12 +66,6 @@ class UserProfileActivity : AppCompatActivity(), EducationAdapter.clickListenerE
         profileRecyclerView = findViewById<RecyclerView>(R.id.profileRecyclerView)
         profileRecyclerView.layoutManager = LinearLayoutManager(this)
 
-        // Check if user is logged in
-        val user = firebaseAuth?.currentUser
-        if (user == null) {
-            startActivity(Intent(this, LoginActivity::class.java))
-            finish()
-        }
 
         // Set up logout button click listener
         /*val logoutButton = findViewById<ImageView>(R.id.buttonLogout)
@@ -77,12 +74,12 @@ class UserProfileActivity : AppCompatActivity(), EducationAdapter.clickListenerE
             finish()
         }*/
 
-        uid = user?.uid
-        if (uid != null) {
+        if (currentUserId != "") {
             // Get user data from Firebase
-            val databaseRef = FirebaseDatabase.getInstance().getReference("users").child(uid!!)
+            val databaseRef =
+                FirebaseDatabase.getInstance().getReference("users").child(currentUserId!!)
             databaseRef.get().addOnSuccessListener { dataSnapshot ->
-                currentUser = dataSnapshot.getValue(User::class.java)
+                currentUser = dataSnapshot.getValue(Employee::class.java)
                 if (currentUser != null) {
                     // Get TextView from layout file
                     val nameField = findViewById<TextView>(R.id.userName)
@@ -107,6 +104,7 @@ class UserProfileActivity : AppCompatActivity(), EducationAdapter.clickListenerE
                     profileAdapter = ProfileAdapter(profileList) { profile, position ->
                         val intent = Intent(this, ProfileActivity::class.java)
                         intent.putExtra("selectedPosition", position)
+                        intent.putExtra("uid", currentUserId)
                         startActivity(intent)
                     }
                     profileRecyclerView.adapter = profileAdapter
@@ -141,6 +139,27 @@ class UserProfileActivity : AppCompatActivity(), EducationAdapter.clickListenerE
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        profileList = emptyList<Profile>().toMutableList()  
+        val ref = FirebaseDatabase.getInstance()
+            .getReference("users")
+            .child(currentUserId.toString())
+            .child("profiles")
+
+        ref.get().addOnSuccessListener { dataSnapshot ->
+            for (profileSnapshot in dataSnapshot.children) {
+                if(profileSnapshot != null){
+                    profileList.add(profileSnapshot.getValue(Profile::class.java)!!)
+                }
+            }
+        }.addOnFailureListener {
+            Toast.makeText(this, "Failed to get updated profiles. Error: ${it.message}", Toast.LENGTH_SHORT).show()
+        }
+
+    }
+
     // Function to edit general information of user
     fun editGeneralInfo() {
         // Inflate dialog layout and get views
@@ -166,9 +185,9 @@ class UserProfileActivity : AppCompatActivity(), EducationAdapter.clickListenerE
                 val newPhone = editPhone.text.toString()
 
                 // Now update Firebase or local UI
-                if (uid != null) {
-                    val updatedUser = User("employee", newName, newEmail, newPhone, currentUser?.education, currentUser?.social, currentUser?.profile)
-                    val ref = FirebaseDatabase.getInstance().getReference("users").child(uid!!)
+                if (currentUserId != null) {
+                    val ref =
+                        FirebaseDatabase.getInstance().getReference("users").child(currentUserId!!)
                     ref.child("email").setValue(newEmail)
                     ref.child("phone").setValue(newPhone)
                     ref.child("name").setValue(newName).addOnSuccessListener {
@@ -210,8 +229,7 @@ class UserProfileActivity : AppCompatActivity(), EducationAdapter.clickListenerE
                 val start = editStart.text.toString()
                 val end = editEnd.text.toString()
 
-                // Now update Firebase or local UI
-                if (uid != null) {
+                if (currentUserId != null) {
                     educationList.add(
                         Education(
                             degree,
@@ -220,7 +238,8 @@ class UserProfileActivity : AppCompatActivity(), EducationAdapter.clickListenerE
                             end
                         )
                     )
-                    val ref = FirebaseDatabase.getInstance().getReference("users").child(uid!!)
+                    val ref =
+                        FirebaseDatabase.getInstance().getReference("users").child(currentUserId!!)
                     ref.child("education").setValue(educationList).addOnSuccessListener {
                         educationAdapter.notifyDataSetChanged()
                     }.addOnFailureListener {
@@ -261,7 +280,7 @@ class UserProfileActivity : AppCompatActivity(), EducationAdapter.clickListenerE
                 val end = editEnd.text.toString()
 
                 // Now update Firebase or local UI
-                if (uid != null) {
+                if (currentUserId != null) {
                     educationList[position] =
                         Education(
                             degree,
@@ -269,7 +288,8 @@ class UserProfileActivity : AppCompatActivity(), EducationAdapter.clickListenerE
                             start,
                             end
                         )
-                    val ref = FirebaseDatabase.getInstance().getReference("users").child(uid!!)
+                    val ref =
+                        FirebaseDatabase.getInstance().getReference("users").child(currentUserId!!)
                     ref.child("education").setValue(educationList).addOnSuccessListener {
                         educationAdapter.notifyDataSetChanged()
                     }.addOnFailureListener {
@@ -287,7 +307,7 @@ class UserProfileActivity : AppCompatActivity(), EducationAdapter.clickListenerE
     @SuppressLint("NotifyDataSetChanged")
     override fun deleteEducationInfo(education: Education, position: Int) {
         educationList.removeAt(position)
-        val ref = FirebaseDatabase.getInstance().getReference("users").child(uid!!)
+        val ref = FirebaseDatabase.getInstance().getReference("users").child(currentUserId!!)
         ref.child("education").setValue(educationList).addOnSuccessListener {
             educationAdapter.notifyDataSetChanged()
         }.addOnFailureListener {
@@ -298,7 +318,7 @@ class UserProfileActivity : AppCompatActivity(), EducationAdapter.clickListenerE
 
     // Function to add social account of user
     @SuppressLint("NotifyDataSetChanged")
-    fun addSocialAccount(){
+    fun addSocialAccount() {
         // Inflate dialog layout and get views
         val dialogView = layoutInflater.inflate(R.layout.dialog_add_edit_social_link, null)
         val editName = dialogView.findViewById<EditText>(R.id.editName)
@@ -314,14 +334,15 @@ class UserProfileActivity : AppCompatActivity(), EducationAdapter.clickListenerE
                 val link = editLink.text.toString()
 
                 // Now update Firebase or local UI
-                if (uid != null) {
+                if (currentUserId != null) {
                     socialList.add(
                         SocialLink(
                             name,
                             link
                         )
                     )
-                    val ref = FirebaseDatabase.getInstance().getReference("users").child(uid!!)
+                    val ref =
+                        FirebaseDatabase.getInstance().getReference("users").child(currentUserId!!)
                     ref.child("social").setValue(socialList).addOnSuccessListener {
                         socialAdapter.notifyDataSetChanged()
                     }.addOnFailureListener {
@@ -355,13 +376,14 @@ class UserProfileActivity : AppCompatActivity(), EducationAdapter.clickListenerE
                 val link = editLink.text.toString()
 
                 // Now update Firebase or local UI
-                if (uid != null) {
+                if (currentUserId != null) {
                     socialList[position] =
                         SocialLink(
                             name,
                             link
                         )
-                    val ref = FirebaseDatabase.getInstance().getReference("users").child(uid!!)
+                    val ref =
+                        FirebaseDatabase.getInstance().getReference("users").child(currentUserId!!)
                     ref.child("social").setValue(socialList).addOnSuccessListener {
                         socialAdapter.notifyDataSetChanged()
                     }.addOnFailureListener {
@@ -379,7 +401,7 @@ class UserProfileActivity : AppCompatActivity(), EducationAdapter.clickListenerE
     @SuppressLint("NotifyDataSetChanged")
     override fun deleteSocialAccount(social: SocialLink, position: Int) {
         socialList.removeAt(position)
-        val ref = FirebaseDatabase.getInstance().getReference("users").child(uid!!)
+        val ref = FirebaseDatabase.getInstance().getReference("users").child(currentUserId!!)
         ref.child("social").setValue(socialList).addOnSuccessListener {
             socialAdapter.notifyDataSetChanged()
         }.addOnFailureListener {
@@ -390,7 +412,7 @@ class UserProfileActivity : AppCompatActivity(), EducationAdapter.clickListenerE
 
     // Function to add new profile
     @SuppressLint("NotifyDataSetChanged")
-    fun addNewProfile(){
+    fun addNewProfile() {
         // Inflate dialog layout and get views
         val dialogView = layoutInflater.inflate(R.layout.dialog_add_edit_profile, null)
         val editTitleTextView = dialogView.findViewById<EditText>(R.id.editTitle)
@@ -405,19 +427,20 @@ class UserProfileActivity : AppCompatActivity(), EducationAdapter.clickListenerE
                 val summary = editSummaryTextView.text.toString()
 
                 // Now update Firebase or local UI
-                if (uid != null) {
+                if (currentUserId != null) {
                     profileList.add(
                         Profile(
                             title,
                             summary
                         )
                     )
-                    val ref = FirebaseDatabase.getInstance().getReference("users").child(uid!!)
+                    val ref =
+                        FirebaseDatabase.getInstance().getReference("users").child(currentUserId!!)
                     ref.child("profile").setValue(profileList).addOnSuccessListener {
-                            profileAdapter.notifyDataSetChanged()
-                        }.addOnFailureListener {
-                            Toast.makeText(this, "Add failed: ${it.message}", Toast.LENGTH_LONG).show()
-                        }
+                        profileAdapter.notifyDataSetChanged()
+                    }.addOnFailureListener {
+                        Toast.makeText(this, "Add failed: ${it.message}", Toast.LENGTH_LONG).show()
+                    }
                 }
             }
         dialog.show()

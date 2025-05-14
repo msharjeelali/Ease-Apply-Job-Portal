@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="12dp"
-    android:orientation="vertical"
-    android:padding="10dp">
+    android:orientation="vertical">
 
     <LinearLayout
         android:id="@+id/container"
@@ -33,7 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="This is short summary."
-            android:textColor="#6B7280"
+            android:textColor="#546E7A"
             android:textSize="16sp"
             tools:ignore="HardcodedText" />
 
@@ -44,7 +43,7 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="10dp"
+        android:layout_marginEnd="5dp"
         android:backgroundTint="#ffffff"
         android:contentDescription="Delete icon"
         android:src="@drawable/delete"

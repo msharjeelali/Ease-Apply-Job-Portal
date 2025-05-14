@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".EmployerDashboardActivity">
+
+    <!-- Header -->
+    <TextView
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="8dp"
+        android:text="Employer Dashboard"
+        android:textAlignment="center"
+        android:textColor="@color/secondary"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        tools:ignore="HardcodedText" />
+
+    <!-- Company Information Card -->
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="#E5FFE0"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="2dp">
+
+        <!-- Company Information Container -->
+        <RelativeLayout
+            android:id="@+id/containerInformation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <!-- Company Name -->
+            <TextView
+                android:id="@+id/companyName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:letterSpacing="0.1"
+                android:text="Company Name"
+                android:textColor="#2F930B"
+                android:textSize="28sp"
+                tools:ignore="HardcodedText" />
+
+            <!-- Divider -->
+            <View
+                android:id="@+id/first"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@id/companyName"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:background="#333333" />
+
+            <!-- Company Email Information -->
+            <LinearLayout
+                android:id="@+id/layoutCompanyEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/first"
+                android:orientation="horizontal"
+                tools:ignore="UseCompoundDrawables">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:contentDescription="Email icon"
+                    android:background="#333333"
+                    android:src="@drawable/email"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/companyEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="10dp"
+                    android:text="Email Address"
+                    android:textColor="#333333"
+                    android:textSize="18sp"
+                    tools:ignore="HardcodedText,RtlSymmetry" />
+
+            </LinearLayout>
+
+            <!-- Company Phone Information -->
+            <LinearLayout
+                android:id="@+id/layoutCompanyPhone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/layoutCompanyEmail"
+                android:orientation="horizontal"
+                tools:ignore="UseCompoundDrawables">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:contentDescription="Phone icon"
+                    android:background="#333333"
+                    android:src="@drawable/phone"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/companyPhone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="10dp"
+                    android:text="Phone Number"
+                    android:textColor="#333333"
+                    android:textSize="18sp"
+                    tools:ignore="HardcodedText,RtlSymmetry" />
+
+            </LinearLayout>
+
+            <!-- Company Website Information -->
+            <LinearLayout
+                android:id="@+id/layoutCompanyWebsite"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/layoutCompanyPhone"
+                android:orientation="horizontal"
+                tools:ignore="UseCompoundDrawables">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:contentDescription="Website icon"
+                    android:background="#333333"
+                    android:src="@drawable/website"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/companyWebsite"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="10dp"
+                    android:text="www.company.com"
+                    android:textColor="#333333"
+                    android:textSize="18sp"
+                    tools:ignore="HardcodedText,RtlSymmetry" />
+
+            </LinearLayout>
+
+            <!-- Company Address Information -->
+            <LinearLayout
+                android:id="@+id/layoutCompanyAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/layoutCompanyWebsite"
+                android:orientation="horizontal"
+                tools:ignore="UseCompoundDrawables">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:contentDescription="Location icon"
+                    android:background="#333333"
+                    android:src="@drawable/location"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/companyAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="10dp"
+                    android:paddingTop="4dp"
+                    android:text="XYZ, ABC, Lahore"
+                    android:textColor="#333333"
+                    android:textSize="18sp"
+                    tools:ignore="HardcodedText,RtlSymmetry" />
+
+            </LinearLayout>
+
+            <!-- Divider -->
+            <View
+                android:id="@+id/second"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@id/layoutCompanyAddress"
+                android:layout_marginTop="8dp"
+                android:background="#333333" />
+
+            <!-- Company Description -->
+            <TextView
+                android:id="@+id/companyDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/second"
+                android:paddingTop="4dp"
+                android:text="Company Description"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                tools:ignore="HardcodedText" />
+
+            <!-- Edit Company Information Button -->
+            <ImageButton
+                android:id="@+id/buttonEditCompany"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:backgroundTint="#E5FFE0"
+                android:contentDescription="Icon edit information"
+                android:src="@drawable/edit"
+                tools:ignore="HardcodedText,TouchTargetSizeCheck" />
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <!-- Jobs Section -->
+    <TextView
+        android:id="@+id/jobsHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:text="Your Job Posts"
+        android:textColor="@color/secondary"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        tools:ignore="HardcodedText" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:id="@+id/jobsRecyclerView" />
+
+    <Button
+        android:id="@+id/buttonCreateJob"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:backgroundTint="#2F930B"
+        android:minHeight="48dp"
+        android:text="Create New Job"
+        android:textColor="#FFFFFF"
+        tools:ignore="HardcodedText,TextContrastCheck" />
+
+</LinearLayout>

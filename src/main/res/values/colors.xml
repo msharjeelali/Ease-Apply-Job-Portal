@@ -10,4 +10,9 @@
     <color name="jobblack">#212121</color>
     <color name="jobgray">#757575</color>
     <color name="jobgreen">#4CAF50</color>
+    <color name="background">#F5F5F5</color>
+    <color name="primary">#2F930B</color>
+    <color name="secondary">#0C2C4D</color>
+    <color name="textGreen">#C7E08B</color>
+    <color name="blue">#005A9C</color>
 </resources>

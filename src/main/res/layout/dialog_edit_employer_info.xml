@@ -42,7 +42,7 @@
         android:layout_height="wrap_content"
         android:hint="Company Website"
         android:importantForAutofill="no"
-        android:inputType="phone"
+        android:inputType="text"
         android:layout_marginTop="12dp"
         tools:ignore="HardcodedText" />
 
@@ -52,17 +52,18 @@
         android:layout_height="wrap_content"
         android:hint="Company Address"
         android:importantForAutofill="no"
-        android:inputType="phone"
+        android:inputType="text"
         android:layout_marginTop="12dp"
         tools:ignore="HardcodedText" />
 
     <EditText
         android:id="@+id/editDescription"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="120dp"
         android:hint="Company Description"
         android:importantForAutofill="no"
-        android:inputType="phone"
+        android:inputType="textMultiLine"
+        android:gravity="top"
         android:layout_marginTop="12dp"
         tools:ignore="HardcodedText" />
 

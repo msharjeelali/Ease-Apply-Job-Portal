@@ -8,7 +8,6 @@ import ExperienceAdapter
 import Profile
 import Project
 import ProjectAdapter
-import User
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Build
@@ -25,32 +24,23 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 
 class ProfileActivity : AppCompatActivity() {
 
-    var firebaseAuth: FirebaseAuth? = null
-    var currentUser: User? = null
-    var uid: String? = null
-
-    var profileList: MutableList<Profile> = mutableListOf<Profile>()
+    var currentUserId: String? = null
     var selectedPosition: Int = 0
     lateinit var currentProfile: Profile
 
-    var courseList: MutableList<String> = mutableListOf<String>()
     lateinit var courseRecyclerView: RecyclerView
     lateinit var courseAdapter: CourseAdapter
 
-    var projectList: MutableList<Project>? = mutableListOf<Project>()
     lateinit var projectRecyclerView: RecyclerView
     lateinit var projectAdapter: ProjectAdapter
 
-    var certificationList: MutableList<Certification>? = mutableListOf<Certification>()
     lateinit var certificationRecyclerView: RecyclerView
     lateinit var certificationAdapter: CertificationAdapter
 
-    var experienceList: MutableList<Experience>? = mutableListOf<Experience>()
     lateinit var experienceRecyclerView: RecyclerView
     lateinit var experienceAdapter: ExperienceAdapter
 
@@ -63,36 +53,73 @@ class ProfileActivity : AppCompatActivity() {
         setContentView(R.layout.activity_profile)
 
         selectedPosition = intent.getIntExtra("selectedPosition", 0)
-
-        // Authenticate user with Firebase
-        firebaseAuth = FirebaseAuth.getInstance()
-
         // Check if user is logged in
-        val user = firebaseAuth?.currentUser
-        if (user == null) {
+        currentUserId = intent.getStringExtra("uid").toString()
+        if (currentUserId == "") {
             startActivity(Intent(this, LoginActivity::class.java))
             finish()
         }
 
-        uid = user?.uid
-        if (uid != null) {
+        if (currentUserId != null) {
             // Get user data from Firebase
-            val databaseRef = FirebaseDatabase.getInstance().getReference("users").child(uid!!)
+            val databaseRef =
+                FirebaseDatabase.getInstance().getReference("users").child(currentUserId!!)
+                    .child("profile").child(selectedPosition.toString())
             databaseRef.get().addOnSuccessListener { dataSnapshot ->
-                currentUser = dataSnapshot.getValue(User::class.java)
-                if (currentUser != null) {
+                currentProfile = dataSnapshot.getValue(Profile::class.java)!!
+                Log.d("Check", currentProfile.toString())
+
+                if (currentProfile != null) {
                     // Get List of profile form database
-                    profileList = currentUser?.profile?.toMutableList() ?: mutableListOf()
-                    currentProfile = profileList?.get(selectedPosition)!!
-                    courseList = currentProfile.courses?.toMutableList() ?: mutableListOf()
-                    projectList = currentProfile.project?.toMutableList() ?: mutableListOf()
-                    certificationList = currentProfile.certification?.toMutableList() ?: mutableListOf()
-                    experienceList = currentProfile.experience?.toMutableList() ?: mutableListOf()
+                    Log.d("Check", currentProfile.toString())
 
                     val profileTitle = findViewById<TextView>(R.id.profileTitle)
                     val profileSummary = findViewById<TextView>(R.id.profileSummary)
                     profileTitle.text = currentProfile.title
                     profileSummary.text = currentProfile.summary
+
+                    // Implement the RecyclerView and Adapter for courses
+                    courseRecyclerView = findViewById<RecyclerView>(R.id.courseRecyclerView)
+                    courseRecyclerView.layoutManager = LinearLayoutManager(this)
+                    courseAdapter = CourseAdapter(currentProfile.courses) { courseToDelete ->
+                         currentProfile.courses?.remove(courseToDelete)
+                    courseAdapter.notifyDataSetChanged()
+                     }
+                    courseRecyclerView.adapter = courseAdapter
+
+                        // Implement the RecyclerView and Adapter for projects
+                        projectRecyclerView = findViewById<RecyclerView>(R.id.projectRecyclerView)
+                        projectRecyclerView.layoutManager = LinearLayoutManager(this)
+                        projectAdapter = ProjectAdapter(currentProfile.project) { projectToDelete ->
+                            currentProfile.project?.remove(projectToDelete)
+                            projectAdapter.notifyDataSetChanged()
+                            // updateProfile()
+                        }
+                        projectRecyclerView.adapter = projectAdapter
+
+
+                      // Implement the RecyclerView and Adapter for certifications
+                        certificationRecyclerView =
+                            findViewById<RecyclerView>(R.id.certificationRecyclerView)
+                        certificationRecyclerView.layoutManager = LinearLayoutManager(this)
+                        certificationAdapter =
+                            CertificationAdapter(currentProfile.certification?.toMutableList()) { certificationToDelete ->
+                                currentProfile.certification?.remove(certificationToDelete)
+                                certificationAdapter.notifyDataSetChanged()
+                                // updateProfile()
+                            }
+                        certificationRecyclerView.adapter = certificationAdapter
+
+                        // Implement the RecyclerView and Adapter for experience
+                        experienceRecyclerView = findViewById<RecyclerView>(R.id.experienceRecyclerView)
+                        experienceRecyclerView.layoutManager = LinearLayoutManager(this)
+                        experienceAdapter =
+                            ExperienceAdapter(currentProfile.experience?.toMutableList()) { experienceToDelete ->
+                                currentProfile.experience?.remove(experienceToDelete)
+                                experienceAdapter.notifyDataSetChanged()
+                                //updateProfile()
+                            }
+                        experienceRecyclerView.adapter = experienceAdapter
                 }
             }.addOnFailureListener {
                 Toast.makeText(this, "Error: ${it.message}", Toast.LENGTH_SHORT).show()
@@ -105,50 +132,6 @@ class ProfileActivity : AppCompatActivity() {
         }
 
 
-        courseList.add("One")
-        courseList.add("Two")
-
-        // Implement the RecyclerView and Adapter for courses
-        courseRecyclerView = findViewById<RecyclerView>(R.id.courseRecyclerView)
-        courseRecyclerView.layoutManager = LinearLayoutManager(this)
-        courseAdapter = CourseAdapter(courseList) { courseToDelete ->
-            courseList.remove(courseToDelete)
-            courseAdapter.notifyDataSetChanged()
-        }
-        courseRecyclerView.adapter = courseAdapter
-
-        Log.d("Test", "$courseList")
-
-        // Implement the RecyclerView and Adapter for projects
-        projectRecyclerView = findViewById<RecyclerView>(R.id.projectRecyclerView)
-        projectRecyclerView.layoutManager = LinearLayoutManager(this)
-        projectAdapter = ProjectAdapter(projectList) { projectToDelete ->
-            projectList?.remove(projectToDelete)
-            projectAdapter.notifyDataSetChanged()
-            // updateProfile()
-        }
-        projectRecyclerView.adapter = projectAdapter
-
-        // Implement the RecyclerView and Adapter for certifications
-        certificationRecyclerView = findViewById<RecyclerView>(R.id.certificationRecyclerView)
-        certificationRecyclerView.layoutManager = LinearLayoutManager(this)
-        certificationAdapter = CertificationAdapter(certificationList) { certificationToDelete ->
-            certificationList?.remove(certificationToDelete)
-            certificationAdapter.notifyDataSetChanged()
-            // updateProfile()
-        }
-        certificationRecyclerView.adapter = certificationAdapter
-
-        // Implement the RecyclerView and Adapter for experience
-        experienceRecyclerView = findViewById<RecyclerView>(R.id.experienceRecyclerView)
-        experienceRecyclerView.layoutManager = LinearLayoutManager(this)
-        experienceAdapter = ExperienceAdapter(experienceList) { experienceToDelete ->
-            experienceList?.remove(experienceToDelete)
-            experienceAdapter.notifyDataSetChanged()
-            // updateProfile()
-        }
-        experienceRecyclerView.adapter = experienceAdapter
-
         // Update profile title and summary
         findViewById<ImageButton>(R.id.editTitleButton).setOnClickListener {
             editGeneralInfo()
@@ -156,26 +139,28 @@ class ProfileActivity : AppCompatActivity() {
 
         // Add experience to the profile
         findViewById<Button>(R.id.addExperienceButton).setOnClickListener {
-            addNewExperience()
-            // updateProfile()
+             addNewExperience()
         }
 
         // Add certification to the profile
         findViewById<Button>(R.id.addCertificationButton).setOnClickListener {
-            addNewCertification()
-            // updateProfile()
+             addNewCertification()
         }
 
         // Add project to the profile
         findViewById<Button>(R.id.addProjectButton).setOnClickListener {
-            addNewProject()
-            // updateProfile()
+             addNewProject()
         }
 
         // Add course to the profile
         findViewById<Button>(R.id.addCourseButton).setOnClickListener {
             addNewCourse()
-            // updateProfile()
+        }
+
+        // Update profile information
+        findViewById<Button>(R.id.updateProfileInfo).setOnClickListener {
+            updateProfile(currentProfile)
+            finish()
         }
     }
 
@@ -200,20 +185,11 @@ class ProfileActivity : AppCompatActivity() {
                 val newTitle = editTitle.text.toString()
                 val newSummary = editSummary.text.toString()
 
-                // Now update Firebase or local UI
-                if (uid != null) {
-                    val updatedProfile = Profile(newTitle, newSummary, currentProfile.experience, currentProfile.certification, currentProfile.project, currentProfile.courses)
-                    profileList[selectedPosition] = updatedProfile
-                    val ref = FirebaseDatabase.getInstance().getReference("users").child(uid!!)
-                    ref.setValue(profileList).addOnSuccessListener {
-                        Toast.makeText(this, "Profile updated", Toast.LENGTH_SHORT).show()
-                        val intent = intent
-                        finish()
-                        startActivity(intent)
-                    }.addOnFailureListener {
-                        Toast.makeText(this, "Update failed: ${it.message}", Toast.LENGTH_LONG)
-                            .show()
-                    }
+                if (currentUserId != null) {
+                    currentProfile.title = newTitle
+                    currentProfile.summary = newSummary
+                    findViewById<TextView>(R.id.profileTitle).text = newTitle
+                    findViewById<TextView>(R.id.profileSummary).text = newSummary
                 }
             }
             .setNegativeButton("Cancel", null)
@@ -221,7 +197,6 @@ class ProfileActivity : AppCompatActivity() {
 
         dialog.show()
     }
-
 
     // Add a new course to the profile
     @SuppressLint("NotifyDataSetChanged")
@@ -238,9 +213,15 @@ class ProfileActivity : AppCompatActivity() {
                 val courseName = editCourseName.text.toString()
 
                 if (courseName.isNotEmpty()) {
-                    courseList.add(courseName)
-                    courseAdapter.notifyDataSetChanged()
-                    Toast.makeText(this, "Course name added $courseList", Toast.LENGTH_SHORT).show()
+                    if (currentProfile.courses == null) {
+                        currentProfile.courses = mutableListOf()
+                        currentProfile.courses?.add(courseName)
+                        Toast.makeText(this, "Course was null", Toast.LENGTH_SHORT).show()
+                    } else {
+                        currentProfile.courses!!.add(courseName)
+                    }
+                    courseAdapter.notifyItemInserted(currentProfile.courses!!.size - 1)
+                    Log.d("Course", currentProfile.courses.toString())
                 } else {
                     Toast.makeText(this, "Course name cannot be empty", Toast.LENGTH_SHORT).show()
                 }
@@ -268,7 +249,13 @@ class ProfileActivity : AppCompatActivity() {
                 val projectDescription = editProjectDescription.text.toString().trim()
                 val projectLink = editProjectLink.text.toString().trim()
                 if (projectTitle.isNotEmpty()) {
-                    projectList?.add(Project(projectTitle, projectDescription, projectLink))
+                    currentProfile.project?.add(
+                        Project(
+                            projectTitle,
+                            projectDescription,
+                            projectLink
+                        )
+                    )
                     projectAdapter.notifyDataSetChanged()
                 } else {
                     Toast.makeText(this, "Course name cannot be empty", Toast.LENGTH_SHORT).show()
@@ -295,7 +282,12 @@ class ProfileActivity : AppCompatActivity() {
                 val certificationTitle = editCertificationTitle.text.toString().trim()
                 val certificationInstitute = editCertificationInstitute.text.toString().trim()
                 if (certificationTitle.isNotEmpty()) {
-                    certificationList?.add(Certification(certificationTitle, certificationInstitute))
+                    currentProfile.certification?.add(
+                        Certification(
+                            certificationTitle,
+                            certificationInstitute
+                        )
+                    )
                     certificationAdapter.notifyDataSetChanged()
                 } else {
                     Toast.makeText(this, "Course name cannot be empty", Toast.LENGTH_SHORT).show()
@@ -328,7 +320,7 @@ class ProfileActivity : AppCompatActivity() {
                 val experienceDescription = editExperienceDescription.text.toString().trim()
                 val experienceCompany = editExperienceCompany.text.toString().trim()
                 if (experienceTitle.isNotEmpty() && experienceCompany.isNotEmpty()) {
-                    experienceList?.add(
+                    currentProfile.experience.add(
                         Experience(
                             experienceTitle,
                             experienceCompany,
@@ -347,13 +339,51 @@ class ProfileActivity : AppCompatActivity() {
         dialog.show()
     }
 
-    fun updateProfile(){
-        val ref = FirebaseDatabase.getInstance().getReference("users").child(uid!!)
-        ref.child("profile").setValue(profileList).addOnSuccessListener {
-            Toast.makeText(this, "Profile updated", Toast.LENGTH_SHORT).show()
+    // Function to check if user already have profile with same title
+    fun isDuplicateTitle(currentUserId: String, newTitle: String, onResult: (Boolean) -> Unit) {
+        val ref = FirebaseDatabase.getInstance()
+            .getReference("users")
+            .child(currentUserId)
+            .child("profiles")
+
+        ref.get().addOnSuccessListener { dataSnapshot ->
+            var duplicateFound = false
+            for (profileSnapshot in dataSnapshot.children) {
+                val existingTitle = profileSnapshot.child("title").getValue(String::class.java)
+                if (existingTitle.equals(newTitle, ignoreCase = true)) {
+                    duplicateFound = true
+                    break
+                }
+            }
+            onResult(duplicateFound)
         }.addOnFailureListener {
-            Toast.makeText(this, "Add failed: ${it.message}", Toast.LENGTH_LONG)
-                .show()
+            onResult(false)
         }
     }
+
+    // Function to update user profile information in database
+    fun updateProfile(updatedProfile: Profile) {
+        isDuplicateTitle(currentUserId.toString(), updatedProfile.title.toString()) { isDuplicate ->
+            if (isDuplicate) {
+                Toast.makeText(
+                    this,
+                    "A profile with this title already exists.",
+                    Toast.LENGTH_SHORT
+                ).show()
+            } else {
+                if (currentProfile.title != "") {
+                    val ref =
+                        FirebaseDatabase.getInstance().getReference("users").child(currentUserId!!)
+                    ref.child("profile").child(selectedPosition.toString()).setValue(updatedProfile)
+                        .addOnSuccessListener {
+                            Toast.makeText(this, "Profile updated", Toast.LENGTH_SHORT).show()
+                        }.addOnFailureListener {
+                            Toast.makeText(this, "Add failed: ${it.message}", Toast.LENGTH_LONG)
+                                .show()
+                        }
+                }
+            }
+        }
+    }
+
 }

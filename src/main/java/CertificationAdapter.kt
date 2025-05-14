@@ -30,5 +30,5 @@ class CertificationAdapter(private var certificateList: MutableList<Certificatio
         }
     }
 
-    override fun getItemCount(): Int = certificateList!!.size
+    override fun getItemCount(): Int = certificateList?.size ?: 0
 }

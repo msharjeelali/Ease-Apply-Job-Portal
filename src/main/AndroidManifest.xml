@@ -15,6 +15,13 @@
         android:theme="@style/Theme.EaseApplyPortal"
         tools:targetApi="31">
         <activity
+            android:name=".ViewJobApplications"
+            android:exported="false" />
+        <activity
+            android:name=".ViewJobEmployerActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
             android:name=".EmployerDashboardActivity"
             android:exported="false" />
         <activity
@@ -24,7 +31,7 @@
             android:name=".UserProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".HomeActivity"
+            android:name=".EmployeeDashboardActivity"
             android:exported="false" />
         <activity
             android:name=".LoginActivity"

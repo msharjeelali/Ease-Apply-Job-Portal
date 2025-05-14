@@ -35,5 +35,5 @@ class ExperienceAdapter(private var experienceList: MutableList<Experience>?, pr
         }
     }
 
-    override fun getItemCount(): Int = experienceList!!.size
+    override fun getItemCount(): Int = experienceList?.size ?: 0
 }

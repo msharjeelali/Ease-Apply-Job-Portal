@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:background="#F5F5F5 ">
 
+    <!-- Logo for Ease Apply -->
     <ImageView
         android:id="@+id/easeApplyLogo"
         android:layout_width="200dp"
@@ -15,6 +16,7 @@
         android:src="@drawable/ease_apply_logo_transparent"
         tools:ignore="HardcodedText" />
 
+    <!-- Tagline for Ease Apply -->
     <TextView
         android:id="@+id/easeApplyTagline"
         android:layout_width="wrap_content"

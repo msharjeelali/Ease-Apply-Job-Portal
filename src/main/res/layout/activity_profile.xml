@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#D6EEFF"
+    android:background="@color/background"
     android:padding="16dp"
     tools:context=".ProfileActivity">
 
@@ -13,33 +13,36 @@
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:orientation="vertical">
 
         <ImageButton
             android:id="@+id/buttonBack"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:background="#D6EEFF"
+            android:background="@color/background"
             android:contentDescription="Back icon"
             android:src="@drawable/back"
-            tools:ignore="HardcodedText" />
+            tools:ignore="HardcodedText,TouchTargetSizeCheck" />
 
-        <RelativeLayout
+        <LinearLayout
             android:id="@+id/header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center_vertical"
             android:orientation="horizontal">
 
             <!-- Profile Title -->
             <TextView
                 android:id="@+id/profileTitle"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:layout_marginBottom="4dp"
+                android:layout_marginTop="6dp"
+                android:layout_marginBottom="6dp"
+                android:layout_weight="1"
                 android:text="Profile Title"
                 android:textColor="#0C2C4D"
-                android:textSize="34sp"
+                android:textSize="26sp"
                 android:textStyle="bold"
                 tools:ignore="HardcodedText" />
 
@@ -47,14 +50,12 @@
                 android:id="@+id/editTitleButton"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:background="#D6EEFF"
+                android:background="@color/background"
                 android:contentDescription="Edit icon"
                 android:src="@drawable/edit"
-                tools:ignore="HardcodedText" />
+                tools:ignore="HardcodedText,TouchTargetSizeCheck" />
 
-        </RelativeLayout>
+        </LinearLayout>
 
         <!-- Summary -->
         <TextView
@@ -63,8 +64,8 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:text="This is a short professional summary."
-            android:textColor="#6B7280"
-            android:textSize="20sp"
+            android:textColor="#546E7A"
+            android:textSize="18sp"
             tools:ignore="HardcodedText" />
 
         <!-- Experience Section -->
@@ -88,7 +89,7 @@
                     android:layout_height="wrap_content"
                     android:text="Experience"
                     android:textColor="#0C2C4D"
-                    android:textSize="24sp"
+                    android:textSize="20sp"
                     android:textStyle="bold"
                     tools:ignore="HardcodedText" />
 
@@ -98,14 +99,14 @@
                     android:layout_height="wrap_content" />
 
                 <Button
+                    android:id="@+id/addExperienceButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="#FFFFFF"
-                    android:text="+ NEW"
-                    android:textColor="#0027FF"
-                    tools:ignore="HardcodedText"
                     android:layout_gravity="end"
-                    android:id="@+id/addExperienceButton"/>
+                    android:backgroundTint="@color/white"
+                    android:text="+ ADD"
+                    android:textColor="@color/primary"
+                    tools:ignore="HardcodedText,DuplicateSpeakableTextCheck" />
 
             </LinearLayout>
 
@@ -131,7 +132,7 @@
                     android:layout_height="wrap_content"
                     android:text="Certifications"
                     android:textColor="#0C2C4D"
-                    android:textSize="24sp"
+                    android:textSize="20sp"
                     android:textStyle="bold"
                     tools:ignore="HardcodedText" />
 
@@ -141,14 +142,14 @@
                     android:layout_height="wrap_content" />
 
                 <Button
+                    android:id="@+id/addCertificationButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="#FFFFFF"
-                    android:text="+ NEW"
-                    android:textColor="#0027FF"
-                    tools:ignore="HardcodedText"
                     android:layout_gravity="end"
-                    android:id="@+id/addCertificationButton"/>
+                    android:backgroundTint="@color/white"
+                    android:text="+ ADD"
+                    android:textColor="@color/primary"
+                    tools:ignore="HardcodedText" />
 
             </LinearLayout>
 
@@ -174,7 +175,7 @@
                     android:layout_height="wrap_content"
                     android:text="Projects"
                     android:textColor="#0C2C4D"
-                    android:textSize="24sp"
+                    android:textSize="20sp"
                     android:textStyle="bold"
                     tools:ignore="HardcodedText" />
 
@@ -188,9 +189,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
-                    android:background="#FFFFFF"
-                    android:text="+ NEW"
-                    android:textColor="#0027FF"
+                    android:backgroundTint="@color/white"
+                    android:text="+ ADD"
+                    android:textColor="@color/primary"
                     tools:ignore="HardcodedText" />
 
             </LinearLayout>
@@ -217,7 +218,7 @@
                     android:layout_height="wrap_content"
                     android:text="Courses"
                     android:textColor="#0C2C4D"
-                    android:textSize="24sp"
+                    android:textSize="20sp"
                     android:textStyle="bold"
                     tools:ignore="HardcodedText" />
 
@@ -227,18 +228,30 @@
                     android:layout_height="wrap_content" />
 
                 <Button
+                    android:id="@+id/addCourseButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="#FFFFFF"
-                    android:text="+ NEW"
-                    android:textColor="#0027FF"
-                    tools:ignore="HardcodedText"
                     android:layout_gravity="end"
-                    android:id="@+id/addCourseButton"/>
+                    android:backgroundTint="@color/white"
+                    android:text="+ ADD"
+                    android:textColor="@color/primary"
+                    tools:ignore="HardcodedText" />
 
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>
+
+        <Button
+            android:id="@+id/updateProfileInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:backgroundTint="@color/primary"
+            android:minHeight="48dp"
+            android:layout_gravity="end"
+            android:text="Update Profile Info"
+            android:textColor="#FFFFFF"
+            tools:ignore="HardcodedText,TextContrastCheck,TouchTargetSizeCheck" />
 
     </LinearLayout>
 

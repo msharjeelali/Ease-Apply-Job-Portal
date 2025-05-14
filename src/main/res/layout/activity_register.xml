@@ -3,11 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingLeft="50dp"
     android:background="#F5F5F5"
+    android:paddingLeft="50dp"
     android:paddingRight="50dp"
     tools:context=".RegisterActivity">
 
+    <!-- Logo for Ease Apply -->
     <TextView
         android:id="@+id/appName"
         android:layout_width="wrap_content"
@@ -21,6 +22,7 @@
         android:textStyle="bold"
         tools:ignore="HardcodedText" />
 
+    <!-- Tagline for Registration Activity Ease Apply -->
     <TextView
         android:id="@+id/registerTitle"
         android:layout_width="wrap_content"
@@ -36,52 +38,54 @@
         android:textStyle="bold"
         tools:ignore="HardcodedText" />
 
+    <!-- Fragment Switch Buttons -->
     <LinearLayout
-        style="?android:attr/buttonBarStyle"
-        android:layout_below="@id/registerTitle"
+        android:id="@+id/fragmentButtons"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:layout_below="@id/registerTitle"
+        android:layout_marginTop="24dp"
         android:gravity="center"
-        android:id="@+id/fragmentButtons"
-        android:layout_marginTop="24dp">
+        android:orientation="horizontal">
 
         <Button
-            android:id="@+id/personButton"
+            android:id="@+id/buttonEmployeeFragment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Person"
-            android:textColor="@color/black"
-            tools:ignore="ButtonStyle,HardcodedText"
             android:layout_weight="0.5"
-            android:backgroundTint="#ffffff" />
+            android:backgroundTint="#ffffff"
+            android:text="Employee"
+            android:textColor="@color/black"
+            tools:ignore="ButtonStyle,HardcodedText" />
 
         <Button
-            android:id="@+id/recruiterButton"
+            android:id="@+id/buttonEmployerFragment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Recruiter"
-            android:textColor="@color/black"
-            tools:ignore="HardcodedText"
+            android:layout_weight="0.5"
             android:backgroundTint="#F5F5F5"
-            android:layout_weight="0.5"/>
+            android:text="Employer"
+            android:textColor="@color/black"
+            tools:ignore="ButtonStyle,HardcodedText" />
 
     </LinearLayout>
 
+    <!-- Register Fragment Container -->
     <FrameLayout
-        android:id="@+id/registerFragmentContainer"
+        android:id="@+id/containerRegisterFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/fragmentButtons"
-        android:layout_weight="1"
+        android:layout_below="@id/fragmentButtons"
         android:layout_marginTop="16dp"
+        android:layout_weight="1"
         tools:ignore="ObsoleteLayoutParam" />
 
+    <!-- Login Button -->
     <Button
         android:id="@+id/buttonLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/registerFragmentContainer"
+        android:layout_below="@id/containerRegisterFragment"
         android:layout_marginBottom="8dp"
         android:backgroundTint="#ffffff"
         android:elevation="4dp"

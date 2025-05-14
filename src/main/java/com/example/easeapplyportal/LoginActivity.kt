@@ -16,18 +16,16 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
-        // Set layout file to activity_login.xml
+        // Set the content view to the login layout
         setContentView(R.layout.activity_login)
 
-        // Sign out if user is loged in
+        // Sign out if user is logged in
         FirebaseAuth.getInstance().signOut()
-
-        // Authenticate user with Firebase
-        val firebaseAuth = FirebaseAuth.getInstance()
 
         // Set up login button click listener
         val loginButton = findViewById<Button>(R.id.buttonLogin)
         loginButton.setOnClickListener {
+
             // Get user input
             var email = findViewById<EditText>(R.id.inputEmail).getText().toString()
             var password = findViewById<EditText>(R.id.inputPassword).getText().toString()
@@ -38,53 +36,61 @@ class LoginActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            // Sign in with email and password
+            // Sign in with email and password using Firebase Authentication
+            val firebaseAuth = FirebaseAuth.getInstance()
             firebaseAuth.signInWithEmailAndPassword(email, password)
-                // If successful, start UserProfileActivity
-                .addOnSuccessListener {
-                    val uid = it.user?.uid ?: return@addOnSuccessListener
 
+                // If successful, start next activity
+                .addOnSuccessListener {
+
+                    // Get user ID from Firebase Authentication
+                    val uid = it.user?.uid
+                    if (uid == null) {
+                        Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show()
+                        return@addOnSuccessListener
+                    }
+
+                    // Get user type from Firebase Realtime Database
                     val userRef = FirebaseDatabase.getInstance().getReference("users").child(uid)
                     userRef.get().addOnSuccessListener { dataSnapshot ->
                         if (dataSnapshot.exists()) {
                             val userType = dataSnapshot.child("type").value.toString()
 
+                            // Start appropriate activity based on user type
                             if (userType == "employer") {
-                                startActivity(Intent(this, EmployerDashboardActivity::class.java))
+                                val intent = Intent(this, EmployerDashboardActivity::class.java)
+                                intent.putExtra("uid", uid)
+                                startActivity(intent)
                             } else if (userType == "employee") {
-                                startActivity(Intent(this, HomeActivity::class.java))
+                                val intent = Intent(this, EmployeeDashboardActivity::class.java)
+                                intent.putExtra("uid", uid)
+                                startActivity(intent)
                             }
-
                             finish()
                         } else {
                             Toast.makeText(this, "User data not found.", Toast.LENGTH_SHORT).show()
                         }
-                    }
-                        // If unsuccessful, show error message
-                        .addOnFailureListener {
-                            // Handle different types of exceptions
-                            val errorMessage = when (it) {
-                                // If credentials is incorrect, show message
-                                is FirebaseAuthInvalidCredentialsException -> {
-                                    "Invalid credentials."
-                                }
-                                // If other exception, show generic message
-                                else -> {
-                                    "Login failed: ${it.localizedMessage}"
-                                }
+                    }.addOnFailureListener {
+                        // Handle different types of exceptions
+                        val errorMessage = when (it) {
+                            is FirebaseAuthInvalidCredentialsException -> {
+                                "Invalid credentials."
                             }
-                            Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()
+                            else -> {
+                                "Login failed: ${it.localizedMessage}"
+                            }
                         }
+                        Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()
+                    }
                 }
         }
 
         // Set up register button click listener
         val registerButton = findViewById<Button>(R.id.buttonRegister)
-        registerButton.setOnClickListener{
+        registerButton.setOnClickListener {
             // Start RegisterActivity
             startActivity(Intent(this, RegisterActivity::class.java))
             finish()
         }
     }
 }
-

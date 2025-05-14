@@ -6,14 +6,30 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F9FAFB"
+    android:orientation="vertical"
     android:padding="16dp"
+    android:scrollbars="none"
     tools:context=".UserProfileActivity">
 
+
     <LinearLayout
-        android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
+
+    <!-- Header -->
+        <TextView
+            android:id="@+id/header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="8dp"
+            android:text="Employee Profile"
+            android:textAlignment="center"
+            android:textColor="@color/secondary"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            tools:ignore="HardcodedText" />
 
         <!-- General Info Section -->
         <androidx.cardview.widget.CardView
@@ -21,7 +37,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            app:cardBackgroundColor="#FFFFFF"
+            app:cardBackgroundColor="#E5FFE0"
             app:cardCornerRadius="12dp"
             app:cardElevation="4dp">
 
@@ -42,7 +58,7 @@
                         android:layout_height="wrap_content"
                         android:text="GENERAL INFORMATION"
                         android:textColor="#1E3A8A"
-                        android:textSize="20sp"
+                        android:textSize="18sp"
                         android:textStyle="bold"
                         tools:ignore="HardcodedText" />
 
@@ -53,7 +69,7 @@
                         android:layout_height="25dp"
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
-                        android:background="#ffffff"
+                        android:background="#E5FFE0"
                         android:contentDescription="Edit education information"
                         android:src="@drawable/edit"
                         tools:ignore="HardcodedText,TouchTargetSizeCheck" />
@@ -76,7 +92,7 @@
                     android:layout_marginBottom="8dp"
                     android:text="Full Name"
                     android:textColor="#374151"
-                    android:textSize="30sp"
+                    android:textSize="24sp"
                     android:textStyle="bold"
                     tools:ignore="HardcodedText" />
 
@@ -88,7 +104,7 @@
                     android:layout_marginBottom="8dp"
                     android:text="user-email@example.com"
                     android:textColor="#374151"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     tools:ignore="HardcodedText" />
 
                 <!-- User phone number -->
@@ -98,7 +114,7 @@
                     android:layout_height="wrap_content"
                     android:text="+92123456789"
                     android:textColor="#374151"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     tools:ignore="HardcodedText" />
 
             </LinearLayout>
@@ -106,180 +122,149 @@
         </androidx.cardview.widget.CardView>
 
         <!-- Education Section -->
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardEducation"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            app:cardBackgroundColor="#FFFFFF"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="4dp">
+            android:orientation="vertical"
+            android:layout_marginBottom="10dp">
 
-            <LinearLayout
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/educationTitle"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="20dp">
+                android:text="EDUCATION"
+                android:textColor="#1E3A8A"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                tools:ignore="HardcodedText" />
 
-                <TextView
-                    android:id="@+id/educationTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="EDUCATION"
-                    android:textColor="#1E3A8A"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    tools:ignore="HardcodedText" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="16dp"
+                android:background="#E0E7FF" />
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="16dp"
-                    android:background="#E0E7FF" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/educationRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/educationRecyclerView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+            <Button
+                android:id="@+id/buttonEducationAdd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:backgroundTint="@color/primary"
+                android:minWidth="100dp"
+                android:minHeight="48dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:text="+ New Entry"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                tools:ignore="HardcodedText,DuplicateSpeakableTextCheck" />
 
-                <Button
-                    android:id="@+id/buttonEducationAdd"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:backgroundTint="#10B981"
-                    android:minWidth="100dp"
-                    android:minHeight="48dp"
-                    android:paddingLeft="16dp"
-                    android:paddingRight="16dp"
-                    android:text="+ New Entry"
-                    android:textAllCaps="false"
-                    android:textColor="#3949AB"
-                    android:textStyle="bold"
-                    tools:ignore="HardcodedText,DuplicateSpeakableTextCheck" />
+        </LinearLayout>
 
-            </LinearLayout>
-
-        </androidx.cardview.widget.CardView>
 
         <!-- Social Accounts Section -->
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardSocialAccounts"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            app:cardBackgroundColor="#FFFFFF"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="4dp">
+            android:orientation="vertical"
+            android:layout_marginBottom="10dp">
 
-            <LinearLayout
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/socialTitle"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="20dp">
+                android:text="SOCIAL ACCOUNTS"
+                android:textColor="#1E3A8A"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                tools:ignore="HardcodedText" />
 
-                <TextView
-                    android:id="@+id/socialTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="SOCIAL ACCOUNTS"
-                    android:textColor="#1E3A8A"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    tools:ignore="HardcodedText" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="16dp"
+                android:background="#E0E7FF" />
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="16dp"
-                    android:background="#E0E7FF" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/socialRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/socialRecyclerView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+            <Button
+                android:id="@+id/buttonSocialAdd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:backgroundTint="@color/primary"
+                android:minWidth="100dp"
+                android:minHeight="48dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:text="+ New Entry"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                tools:ignore="HardcodedText" />
 
-                <Button
-                    android:id="@+id/buttonSocialAdd"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:backgroundTint="#10B981"
-                    android:minWidth="100dp"
-                    android:minHeight="48dp"
-                    android:paddingLeft="16dp"
-                    android:paddingRight="16dp"
-                    android:text="+ New Entry"
-                    android:textAllCaps="false"
-                    android:textColor="#3949AB"
-                    android:textStyle="bold"
-                    tools:ignore="HardcodedText" />
-
-            </LinearLayout>
-
-        </androidx.cardview.widget.CardView>
+        </LinearLayout>
 
         <!-- Profile Section -->
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardProfile"
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardBackgroundColor="#FFFFFF"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="4dp">
+            android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="match_parent"
+
+            <TextView
+                android:id="@+id/profileTitle"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="20dp">
+                android:text="PROFILE"
+                android:textColor="#1E3A8A"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                tools:ignore="HardcodedText" />
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="16dp"
+                android:background="#E0E7FF" />
 
-                <TextView
-                    android:id="@+id/profileTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="PROFILE"
-                    android:textColor="#1E3A8A"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    tools:ignore="HardcodedText" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/profileRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="0dp" />
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="16dp"
-                    android:background="#E0E7FF" />
+            <!-- New Entry Button -->
+            <Button
+                android:id="@+id/buttonProfileAdd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:backgroundTint="@color/primary"
+                android:minWidth="100dp"
+                android:minHeight="48dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:text="+ New Entry"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                tools:ignore="HardcodedText" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/profileRecyclerView" />
-
-                <!-- New Entry Button -->
-                <Button
-                    android:id="@+id/buttonProfileAdd"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:backgroundTint="#10B981"
-                    android:minWidth="100dp"
-                    android:minHeight="48dp"
-                    android:paddingLeft="16dp"
-                    android:paddingRight="16dp"
-                    android:text="+ New Entry"
-                    android:textAllCaps="false"
-                    android:textColor="#3949AB"
-                    android:textStyle="bold"
-                    tools:ignore="HardcodedText" />
-
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
+        </LinearLayout>
 
     </LinearLayout>
-
 </ScrollView>
-
